@@ -1,0 +1,13 @@
+.page-app {
+    text-align: center;
+}
+
+.page-app-header {
+    background-color: #fafbfc;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
