@@ -5,10 +5,11 @@ import {
   Tooltip,
   Icon,
   Button,
+  Result,
+  message
 } from 'antd';
 import Logo from "../../components/Logo/Logo";
 import axios from 'axios';
-import { Redirect } from 'react-router-dom'
 import "../login/page.css"
 
 class RegistrationForm extends React.Component {
@@ -34,6 +35,21 @@ class RegistrationForm extends React.Component {
     });
   };
 
+  renderRegisterSuccess() {
+    return (
+      <Result
+        status="success"
+        title="账号注册成功"
+        subTitle="Welcome to Hyuga :)"
+        extra={[
+          <Button type="primary" key="goLogin">
+          <a href="/login">Go Login</a>
+          </Button>,
+        ]}
+      />
+    )
+  }
+
   register(data) {
     axios.post(`${global.API}${this.baseUrl}`,
       JSON.stringify(data),
@@ -44,10 +60,18 @@ class RegistrationForm extends React.Component {
       }
     ).then(res => {
       console.log('res=>', res);
-      this.setState({
-        registerFlag: true
-      });
-    })
+      // 注册成功
+      if (res.data.meta.code === 200) {
+        this.setState({
+          registerFlag: true
+        });
+      }
+    }
+    ).catch(errorRes => { 
+      console.log('errorRes=>', errorRes.response.data);
+      // error
+      message.error(errorRes.response.data.meta.message, 4);
+    });
   }
 
   handleConfirmBlur = e => {
@@ -84,7 +108,7 @@ class RegistrationForm extends React.Component {
 
   render() {
     if (this.state.registerFlag === true) {
-      return <Redirect to="/login" />
+      return this.renderRegisterSuccess()
     }
     const { getFieldDecorator } = this.props.form;
 
@@ -121,7 +145,7 @@ class RegistrationForm extends React.Component {
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your username!',
+                    message: 'Please input your username(Length between 4 and 30)!',
                     min: 4,
                     max: 30
                   },
@@ -133,8 +157,9 @@ class RegistrationForm extends React.Component {
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your password!',
+                    message: 'Please input your password(Length between 8 and 64)!',
                     min: 8,
+                    max: 64
                   },
                   {
                     validator: this.validateToNextPassword,
@@ -147,8 +172,7 @@ class RegistrationForm extends React.Component {
                 rules: [
                   {
                     required: true,
-                    message: 'Please confirm your password!',
-                    min: 8,
+                    message: 'Please confirm your password!'
                   },
                   {
                     validator: this.compareToFirstPassword,
