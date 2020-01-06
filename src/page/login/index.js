@@ -77,7 +77,7 @@ class NormalLoginForm extends React.Component {
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your username!',
+                    message: 'Please input your username(Length between 4 and 30)!',
                     min: 4,
                     max: 30
                   }
@@ -94,8 +94,9 @@ class NormalLoginForm extends React.Component {
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Password!',
-                    min: 8
+                    message: 'Please input your Password(Length between 8 and 64)!',
+                    min: 8,
+                    max: 64
                   }],
               })(
                 <Input
