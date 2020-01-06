@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 import Logo from "../../components/Logo/Logo";
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
@@ -50,8 +50,14 @@ class NormalLoginForm extends React.Component {
           loginFlag: true
         });
       }
-
-    })
+    }).catch(errorRes => { 
+      console.log('errorRes=>', errorRes.response.data);
+      // error
+      if (errorRes.response.data.meta.code === 99) {
+        message.error("用户名或密码错误", 4); 
+      }
+      message.error(errorRes.response.data.meta.message, 3);
+    });
   }
 
 
