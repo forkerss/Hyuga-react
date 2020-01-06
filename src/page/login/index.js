@@ -55,8 +55,9 @@ class NormalLoginForm extends React.Component {
       // error
       if (errorRes.response.data.meta.code === 99) {
         message.error("用户名或密码错误", 4); 
+      } else {
+        message.error(errorRes.response.data.meta.message, 3);
       }
-      message.error(errorRes.response.data.meta.message, 3);
     });
   }
 
