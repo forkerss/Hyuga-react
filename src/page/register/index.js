@@ -8,6 +8,7 @@ import {
 } from 'antd';
 import Logo from "../../components/Logo/Logo";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 import "../login/page.css"
 
 class RegistrationForm extends React.Component {
@@ -16,6 +17,7 @@ class RegistrationForm extends React.Component {
     this.state = {
       confirmDirty: false,
       autoCompleteResult: [],
+      registerFlag: false
     }
   }
   baseUrl = '/v1/users';
@@ -42,6 +44,9 @@ class RegistrationForm extends React.Component {
       }
     ).then(res => {
       console.log('res=>', res);
+      this.setState({
+        registerFlag: true
+      });
     })
   }
 
@@ -78,6 +83,9 @@ class RegistrationForm extends React.Component {
   };
 
   render() {
+    if (this.state.registerFlag === true) {
+      return <Redirect to="/login" />
+    }
     const { getFieldDecorator } = this.props.form;
 
     const formItemLayout = {
