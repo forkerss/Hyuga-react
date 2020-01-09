@@ -59,7 +59,7 @@ class RecordsDns extends React.Component {
 
     renderList(data) {
         return (
-            <Table dataSource={data} style={{ marginTop: 24 }}>
+            <Table dataSource={data} style={{ marginTop: 24 }} bordered={true} tableLayout={'fixed'}>
                 <Column title="ID" dataIndex="id" key="id" />
                 <Column title="Name" dataIndex="name" key="name" />
                 <Column title="Remote Addr" dataIndex="remote_addr" key="remote_addr" />
