@@ -34,7 +34,7 @@ class Profile extends React.Component {
         return (
             <Typography>
                 <Avatar size="large" >{this.state.data.nickname}</Avatar>
-                <Title>Profie</Title>
+                <Title>Profile</Title>
                 <Divider />
 
                 <Paragraph>

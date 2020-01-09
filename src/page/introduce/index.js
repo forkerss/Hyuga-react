@@ -11,7 +11,7 @@ function Introduction() {
             <Logo a={false} />
             <Title level={2}>Introduction</Title>
             <Paragraph>
-                <Text strong><a href="/">Hyug🌀</a>是一个用来检测带外(Out-of-Band)流量的监控平台(监测DNS查询和HTTP请求)。</Text>
+                <Text strong><a href="/">Hyug🌀</a>是一个用来检测带外(Out-of-Band)流量(DNS查询和HTTP请求)的监控平台。</Text>
             </Paragraph>
             <Paragraph>
                 名字来源：日向一族是火影忍者中的火之国木叶忍者村的一个氏族，日向一族拥有血继限界白眼。 与 <a href="http://ceye.io">ceye.io</a> 相似，只因兴趣使然决定写出这款工具将其开源。
@@ -32,11 +32,6 @@ function Introduction() {
             </Paragraph>
 
             <Divider />
-
-            <Title level={3}>项目地址</Title>
-            <Paragraph>
-                <Text strong><a href="https://github.com/Buzz2d0/Hyuga">https://github.com/Buzz2d0/Hyuga</a></Text>
-            </Paragraph>
         </Typography>
     );
 }
