@@ -43,18 +43,18 @@ class NormalLoginForm extends React.Component {
       console.log('res=>', res);
       if (res.data.meta.code === 200) {
         // 更新 cookie
-        let options = { path: '/', expires: getAfterDaysDate(7) };
+        let options = { path: '/', expires: getAfterDaysDate(7), httpOnly: true };
         global.COOKIES.set('username', res.data.data.username, options);
         global.COOKIES.set('jwtoken', res.data.data.jwtoken, options);
         this.setState({
           loginFlag: true
         });
       }
-    }).catch(errorRes => { 
+    }).catch(errorRes => {
       console.log('errorRes=>', errorRes.response.data);
       // error
       if (errorRes.response.data.meta.code === 99) {
-        message.error("用户名或密码错误", 4); 
+        message.error("用户名或密码错误", 4);
       } else {
         message.error(errorRes.response.data.meta.message, 3);
       }
