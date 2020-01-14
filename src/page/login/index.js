@@ -43,7 +43,7 @@ class NormalLoginForm extends React.Component {
       console.log('res=>', res);
       if (res.data.meta.code === 200) {
         // 更新 cookie
-        let options = { path: '/', expires: getAfterDaysDate(7), httpOnly: true };
+        let options = { path: '/', expires: getAfterDaysDate(7) };
         global.COOKIES.set('username', res.data.data.username, options);
         global.COOKIES.set('jwtoken', res.data.data.jwtoken, options);
         this.setState({
