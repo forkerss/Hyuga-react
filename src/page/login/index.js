@@ -62,7 +62,11 @@ class NormalLoginForm extends React.Component {
       if (errorRes.response.data.meta.code === 99) {
         message.error("用户名或密码错误", 4);
       } else {
-        message.error(errorRes.response.data.meta.message + ": " + errorRes.response.data.meta.description, 3);
+        let err_msg = errorRes.response.data.meta.message;
+        if ("description" in errorRes.response.data.meta) {
+          err_msg += ": " + errorRes.response.data.meta.description;
+        }
+        message.error(err_msg, 3);
       }
     });
   }
@@ -119,10 +123,6 @@ class NormalLoginForm extends React.Component {
                 Log in
               </Button>
 
-              <a className="login-form-forgot" href="/forgot/password">
-                Forgot password
-              </a>
-              Or
               <a href="/register">register now!</a>
             </Form.Item>
           </Form>
