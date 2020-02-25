@@ -7,6 +7,7 @@ export * from './router/config';
 global.HOST = "hyuga.io:5000"
 global.API = `http://api.${global.HOST}`;
 global.COOKIES = new Cookies();
+global.DEBUG = true;
 
 // menus
 global.menus = [

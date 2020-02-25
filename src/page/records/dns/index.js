@@ -24,7 +24,9 @@ class RecordsDns extends React.Component {
                 },
             }
         ).then((res) => {
-            console.log('res=>', res);
+            if (global.DEBUG) {
+                console.log('res=>', res);
+            }
             if (res.data.meta.code === 200) {
                 this.setState({ data: res.data.data })
             }

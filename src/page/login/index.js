@@ -25,7 +25,9 @@ class NormalLoginForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        if (global.DEBUG) {
+          console.log('Received values of form: ', values);
+        }
         this.login(values);
       }
     });
@@ -40,7 +42,9 @@ class NormalLoginForm extends React.Component {
         },
       }
     ).then(res => {
-      console.log('res=>', res);
+      if (global.DEBUG) {
+        console.log('res=>', res);
+      }
       if (res.data.meta.code === 200) {
         // 更新 cookie
         let options = { path: '/', expires: getAfterDaysDate(7) };
@@ -51,12 +55,14 @@ class NormalLoginForm extends React.Component {
         });
       }
     }).catch(errorRes => {
-      console.log('errorRes=>', errorRes.response.data);
+      if (global.DEBUG) {
+        console.log('errorRes=>', errorRes.response.data);
+      }
       // error
       if (errorRes.response.data.meta.code === 99) {
         message.error("用户名或密码错误", 4);
       } else {
-        message.error(errorRes.response.data.meta.message, 3);
+        message.error(errorRes.response.data.meta.message + ": " + errorRes.response.data.meta.description, 3);
       }
     });
   }

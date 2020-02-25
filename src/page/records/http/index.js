@@ -23,7 +23,9 @@ class RecordsHttp extends React.Component {
                 },
             }
         ).then(res => {
-            console.log('res=>', res);
+            if (global.DEBUG) {
+                console.log('res=>', res);
+            }
             if (res.data.meta.code === 200) {
                 this.setState({ data: res.data.data });
             }
@@ -46,7 +48,7 @@ class RecordsHttp extends React.Component {
             }
         });
     }
-    
+
     renderRecords() {
         return (
             <Records recordsType="dns"
@@ -54,10 +56,10 @@ class RecordsHttp extends React.Component {
                 clearData={() => this.clearData("http")} />
         );
     }
-    
+
     renderList(data) {
         return (
-            <Table dataSource={data} style={{ marginTop: 24 }} bordered={true}tableLayout={'fixed'}>
+            <Table dataSource={data} style={{ marginTop: 24 }} bordered={true} tableLayout={'fixed'}>
                 <Column title="ID" dataIndex="id" key="id" />
                 <Column title="Name" dataIndex="name" key="name" />
                 <Column title="Remote Addr" dataIndex="remote_addr" key="remote_addr" />
@@ -69,7 +71,7 @@ class RecordsHttp extends React.Component {
             </Table>
         );
     }
-    
+
     render() {
         return (
             <div>

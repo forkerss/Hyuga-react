@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Typography, Divider, Icon} from 'antd';
+import { Avatar, Typography, Divider, Icon } from 'antd';
 import axios from 'axios';
 import HBreadcrumb from "../../components/Breadcrumb/Breadcrumb"
 
@@ -23,7 +23,9 @@ class Profile extends React.Component {
                 },
             }
         ).then((res) => {
-            console.log('res=>', res);
+            if (global.DEBUG) {
+                console.log('res=>', res);
+            }
             if (res.data.meta.code === 200) {
                 this.setState({ data: res.data.data })
             }

@@ -27,7 +27,9 @@ class RegistrationForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        if (global.DEBUG) {
+          console.log('Received values of form: ', values);
+        }
         let values1 = JSON.parse(JSON.stringify(values));
         delete values1.confirm
         this.register(values1);
@@ -43,7 +45,7 @@ class RegistrationForm extends React.Component {
         subTitle="Welcome to Hyuga :)"
         extra={[
           <Button type="primary" key="goLogin">
-          <a href="/login">Go Login</a>
+            <a href="/login">Go Login</a>
           </Button>,
         ]}
       />
@@ -59,7 +61,9 @@ class RegistrationForm extends React.Component {
         },
       }
     ).then(res => {
-      console.log('res=>', res);
+      if (global.DEBUG) {
+        console.log('res=>', res);
+      }
       // 注册成功
       if (res.data.meta.code === 200) {
         this.setState({
@@ -67,8 +71,10 @@ class RegistrationForm extends React.Component {
         });
       }
     }
-    ).catch(errorRes => { 
-      console.log('errorRes=>', errorRes.response.data);
+    ).catch(errorRes => {
+      if (global.DEBUG) {
+        console.log('errorRes=>', errorRes.response.data);
+      }
       // error
       message.error(errorRes.response.data.meta.message, 4);
     });
